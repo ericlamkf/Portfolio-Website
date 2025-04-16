@@ -16,6 +16,11 @@
     border-radius: 10px;
     border: 1px solid grey;
     cursor: pointer;
+    transition: 0.4s all ease;
+}
+
+.projects video.no-hover {
+    filter: brightness(70%) blur(2px);
 }
 
 .project {
@@ -43,7 +48,7 @@
     font-size: 0.8rem;
 }
 
-.project-description button {
+.project-description .website-btn {
     margin-top: 20px;
     color: rgb(212, 144, 255);
     background: transparent;
@@ -57,12 +62,12 @@
     transition: all 0.3s ease;
 }
 
-.project-description button:hover {
+.project-description .website-btn:hover {
     background: rgb(146, 39, 146);
     box-shadow: 0 0 40px rgb(94, 0, 128);
 }
 
-.project-description button:active {
+.project-description .website-btn:active {
     background: rgb(185, 79, 185);
     box-shadow: 0 0 80px rgb(94, 0, 128);
 }
@@ -80,7 +85,7 @@
         font-size: 0.5rem;
     }
 
-    .project-description button {
+    .project-description .website-btn {
         padding: 5px 10px;
         font-size: 0.6rem;
     }

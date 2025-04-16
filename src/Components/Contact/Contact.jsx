@@ -3,6 +3,31 @@ import './Contact.css'
 
 const Contact = () => {
 
+    const [result, setResult] = React.useState("");
+
+    const onSubmit = async (event) => {
+        event.preventDefault();
+        setResult("Sending....");
+        const formData = new FormData(event.target);
+
+        formData.append("access_key", "b8e31cd4-4f2c-4bd0-a5b9-681da7cee7cb");
+
+        const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            setResult("Form Submitted Successfully !");
+            event.target.reset();
+        } else {
+            console.log("Error", data);
+            setResult(data.message);
+        }
+    };
+
     const hyperlinkGithub = () => {
         if (window.confirm("Wanna visit my Github Profile ?")) {
             window.open("https://github.com/ericlamkf", "_blank")
@@ -40,7 +65,7 @@ const Contact = () => {
             </div>
             <div className="right">
                 <p>Looking to build a new website, improve your existing platform or being a unique project to file ? I'm here to help.</p>
-                <form>
+                <form onSubmit={onSubmit}>
                     <label htmlFor="name">Your Name</label>
                     <input type="text" name='name' placeholder='Your full name' />
                     <label htmlFor="email">Your Email Address</label>
@@ -49,6 +74,7 @@ const Contact = () => {
                     <textarea name="message" id="message" placeholder='Share your thoughts...'></textarea>
                     <button type='submit'>Send Message <i class="fa-solid fa-paper-plane"></i></button>
                 </form>
+                <span id='sending'>{result}</span>
             </div>
         </div>
     )
